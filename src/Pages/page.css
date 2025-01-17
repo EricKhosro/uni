@@ -1,0 +1,17 @@
+.login-box {
+  background: rgb(246, 246, 246);
+  background: linear-gradient(
+    90deg,
+    rgba(246, 246, 246, 1) 0%,
+    rgba(246, 246, 246, 1) 100%
+  );
+  position: absolute;
+  right: 200px;
+}
+
+.login-container {
+  background-image: url("../Assets/Images/login-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}

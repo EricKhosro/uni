@@ -1,0 +1,121 @@
+.base-button {
+  width: 100% !important;
+  height: 40px !important;
+  border-radius: 4px !important;
+  padding: 9px 16px !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 20px !important; /* 142.857% */
+  letter-spacing: 0.014px !important;
+}
+
+.base-button .MuiButton-startIcon {
+  margin-left: auto !important;
+}
+
+.base-button .MuiButton-endIcon {
+  margin-right: auto !important;
+  padding-right: 5px;
+  margin-left: 0;
+}
+
+.base-button svg {
+  width: 20px !important;
+  height: 20px !important;
+  color: var(--opacity-012);
+}
+
+/* Primary Button */
+
+.primary-button {
+  background-color: var(--red-02) !important;
+  color: var(--white) !important;
+}
+.primary-button svg {
+  width: 20px !important;
+  height: 20px !important;
+  color: var(--white);
+}
+
+.primary-button.Mui-disabled {
+  background-color: var(--opacity-012) !important;
+  color: var(--opacity-038) !important;
+}
+
+.primary-button:hover {
+  background-color: var(--red-03) !important;
+}
+.primary-button:active {
+  background-color: var(--red-01) !important;
+}
+
+/* Secondary Button */
+
+.secondary-button {
+  background-color: var(--red-04) !important;
+  color: var(--red-02) !important;
+  border: 1px solid var(--red-02) !important;
+}
+
+.secondary-button.Mui-disabled {
+  color: var(--opacity-032) !important;
+  border-color: var(--opacity-012) !important;
+}
+
+.secondary-button:hover {
+  color: var(--red-03) !important;
+  border-color: var(--red-03) !important;
+}
+
+.secondary-button:active {
+  color: var(--red-01) !important;
+  border-color: var(--red-01) !important;
+}
+
+/* text button */
+
+.text-button {
+  background-color: var(--white) !important;
+  color: var(--red-02) !important;
+}
+
+.text-button.Mui-disabled {
+  color: var(--opacity-032) !important;
+}
+
+.text-button:hover {
+  background-color: var(--red-04) !important;
+}
+
+.text-button:active {
+  background-color: var(--red-04) !important;
+}
+
+/* elevated button */
+
+.elevated-button {
+  background-color: var(--white) !important;
+  color: var(--red-02) !important;
+  border: 1px solid var(--red-02) !important;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.elevated-button.Mui-disabled {
+  color: var(--opacity-032) !important;
+  background-color: var(--opacity-012) !important;
+  border: none !important;
+  box-shadow: none;
+}
+
+.elevated-button:hover {
+  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.elevated-button:active {
+  box-shadow: none;
+  border-color: var(--red-01) !important;
+  color: var(--red-01);
+}

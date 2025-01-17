@@ -1,0 +1,222 @@
+.text-input label {
+  transform-origin: top right !important;
+  right: 28px !important;
+  left: auto !important;
+  top: -5px !important;
+  /* font-size: 12px !important; */
+}
+.text-input .MuiInputBase-input,
+.text-input .MuiFormLabel-root,
+.date-input .MuiInputBase-input,
+.date-input .MuiFormLabel-root,
+.drop-down .MuiInputBase-input,
+.drop-down .MuiFormLabel-root {
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: normal !important;
+}
+.text-input .MuiInputLabel-shrink,
+.text-input .MuiInputLabel-animated.Mui-focused {
+  transform: translate(15px, -4.5px) scale(0.75) !important;
+}
+
+.text-input fieldset {
+  border-color: var(--red-01) !important;
+}
+
+.text-input legend {
+  margin-top: 4px !important;
+  text-align: right !important;
+}
+
+.date-input legend,
+.drop-down legend {
+  font-size: 9px !important;
+}
+
+.text-input .MuiInputLabel-asterisk {
+  color: var(--red-01);
+}
+
+.text-input .MuiOutlinedInput-root {
+  direction: rtl !important;
+  height: 40px !important;
+  caret-color: var(--red-01) !important;
+}
+
+.text-input .MuiOutlinedInput-root fieldset {
+  border-width: 2px !important;
+  border-color: var(--border-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root fieldset :hover {
+  border-color: var(--border-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root svg {
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer !important;
+  color: var(--icon-color) !important;
+}
+
+.multi-select .MuiOutlinedInput-root .multi-select-tag svg {
+  color: var(--red-02) !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-error svg {
+  cursor: default !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: var(--red-01) !important;
+  z-index: 10 !important;
+  border-width: 2px !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-focused svg {
+  color: var(--gray-text) !important;
+}
+
+.text-input .MuiFormHelperText-root {
+  font-size: 8px !important;
+  text-align: right !important;
+  position: absolute;
+  bottom: -16px !important;
+  white-space: nowrap !important;
+}
+.text-input .Mui-focused.MuiFormHelperText-root {
+  color: var(--gray-text) !important ;
+  text-align: right !important;
+  bottom: -18px !important;
+}
+
+.multi-select .Mui-focused .multi-select-tag svg {
+  color: var(--red-02) !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.text-input .Mui-focused.MuiFormHelperText-root.Mui-error {
+  color: var(--error-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-focused.Mui-error fieldset {
+  border-color: var(--error-color) !important;
+  border-width: 2px !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-focused.Mui-error svg {
+  color: var(--error-color);
+}
+
+.text-input .Mui-focused.MuiFormLabel-root {
+  color: var(--red-01) !important;
+}
+.error-text-input .MuiOutlinedInput-root fieldset {
+  border-color: var(--error-color) !important;
+}
+
+.text-input .MuiFormLabel-root.Mui-error {
+  color: var(--error-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-error fieldset:hover {
+  border-color: var(--error-color) !important;
+}
+
+.error-text-input .MuiOutlinedInput-root.Mui-error svg {
+  color: var(--error-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-disabled fieldset {
+  border-color: var(--disable-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-disabled fieldset:hover {
+  border-color: var(--disable-color) !important;
+}
+
+.text-input .MuiOutlinedInput-root.Mui-disabled svg {
+  color: var(--disable-color) !important;
+}
+
+.text-input .Mui-disabled.MuiFormLabel-root {
+  color: var(--gray3) !important;
+}
+
+.error-text-input .MuiOutlinedInput-root {
+  caret-color: var(--error-color) !important;
+}
+
+.text-input .MuiAutocomplete-endAdornment {
+  margin-top: 1px;
+  left: 10px !important;
+  right: auto !important;
+}
+
+.drop-down .MuiOutlinedInput-root {
+  padding: 5px 16px 5px 5px !important;
+}
+
+.MuiAutocomplete-listbox li[aria-selected="true"] {
+  background-color: var(--red-04) !important;
+}
+
+.MuiAutocomplete-listbox li:hover {
+  background-color: var(--red-04) !important;
+}
+.MuiAutocomplete-popper {
+  z-index: 999999999999999999 !important;
+}
+
+.text-input-dropdown .MuiOutlinedInput-root {
+  border-top-right-radius: 0 !important ;
+  border-bottom-right-radius: 0 !important ;
+  height: 36px !important;
+}
+.text-input-dropdown .MuiOutlinedInput-root fieldset {
+  border: transparent !important;
+  border-right: 2px solid var(--border-color) !important;
+}
+
+.text-input-dropdown .MuiAutocomplete-endAdornment {
+  margin-top: 3px;
+  left: 8px !important;
+  right: auto !important;
+}
+.text-input-dropdown .MuiOutlinedInput-root {
+  padding: 3px 8px 5px 8px !important;
+}
+
+.text-input-dropdown .MuiAutocomplete-popupIndicator {
+  margin-left: -5px !important;
+}
+
+.mounth-year-dropdown fieldset {
+  border: none !important;
+  height: 38px !important;
+  background-color: var(--white) !important;
+}
+
+.mounth-year-dropdown .MuiAutocomplete-popupIndicator {
+  z-index: 100 !important;
+}
+
+.mounth-year-dropdown .MuiAutocomplete-endAdornment {
+  left: 0px !important;
+}
+
+.mounth-year-dropdown .MuiAutocomplete-input {
+  z-index: 100 !important;
+  padding-top: 5px !important;
+  text-align: center !important;
+}
+
+.mounth-year-dropdown .MuiOutlinedInput-root {
+  padding-right: 0px !important;
+  padding-left: 10px !important;
+}

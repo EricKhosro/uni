@@ -1,0 +1,7 @@
+.checkbox-square:hover {
+  background-color: rgba(239, 64, 86, 0.12);
+}
+
+.checkbox-square:active {
+  background-color: rgba(239, 64, 86, 0.15);
+}
