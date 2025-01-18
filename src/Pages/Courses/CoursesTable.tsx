@@ -7,21 +7,31 @@ import { getFarsiDayOfWeek } from "Utilities/day";
 import { errorHandler } from "Utilities/errorHandler";
 
 interface IProps {
-  ids: number[];
+  ids: number[] | null;
+  refreshFlag: boolean;
+  onFetchComplete: () => void;
 }
 
-const CoursesTable = ({ ids }: IProps) => {
+const CoursesTable = ({ ids, refreshFlag, onFetchComplete }: IProps) => {
   const [courses, setCourses] = useState<ICourse[] | null>(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    fetchCourses();
+  }, []);
+  useEffect(() => {
+    if (refreshFlag) fetchCourses();
+  }, [refreshFlag]);
+
+  function fetchCourses() {
     setLoading(true);
     getCourses()
       .then((resp) => {
         setCourses(resp);
+        onFetchComplete();
       })
       .catch(errorHandler)
       .finally(() => setLoading(false));
-  }, []);
+  }
 
   return (
     <>

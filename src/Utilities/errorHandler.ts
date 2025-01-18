@@ -13,7 +13,7 @@ export const errorHandler = (error?: any) => {
     (error.response && error.response.status === 401) ||
     error.code === "ERR_NETWORK"
   ) {
-    window.location.pathname = "/";
+    // window.location.pathname = "/";
     return;
   } else if (error.response.data.value) toast.error(error.response.data.value);
   else if (error.response.status === 500) toast.error("خطا داخلی");

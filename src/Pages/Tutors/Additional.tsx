@@ -29,7 +29,13 @@ const AdditionalCol: React.FC<{
         {isOpen ? (
           <Modal
             isOpen
-            UI={<CoursesTable ids={row.coursesIds} />}
+            UI={
+              <CoursesTable
+                ids={row.coursesIds}
+                onFetchComplete={() => {}}
+                refreshFlag={false}
+              />
+            }
             onClose={() => setIsOpen(false)}
           />
         ) : (

@@ -1,0 +1,139 @@
+import Button from "Components/Button/Button";
+import StaticDropdown from "Components/Dropdown/StaticDropdown";
+import { StaticMultiSelectDropdown } from "Components/Dropdown/StaticMultiSelectDropdown";
+import FullScreenLoading from "Components/Loading/FullScreenLoading";
+import { CommonTableUI } from "Components/Table/CommonTableUI";
+import TextInput from "Components/TextInput/TextInput";
+import { ITableReport } from "Interfaces/Components-Interfaces/tableInterfaces";
+import { ICourse } from "Interfaces/DTO/course";
+import { ISchedule, IScheduleSearchParam } from "Interfaces/DTO/schedule";
+import { ITutor } from "Interfaces/DTO/tutor";
+import React, { useEffect, useState } from "react";
+import { getCourses } from "Requests/course";
+import { getSchedule } from "Requests/schedule";
+import { getTutors } from "Requests/tutor";
+import { getFarsiDayOfWeek } from "Utilities/day";
+import { errorHandler } from "Utilities/errorHandler";
+
+interface IRow extends ITableReport {
+  row: number;
+  day: string;
+  courseTitle: string;
+}
+
+const Schedule = () => {
+  const [tutors, setTutors] = useState<ITutor[] | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useState({} as IScheduleSearchParam);
+  const [schedule, setSchedule] = useState<ISchedule[] | null>(null);
+  const [courses, setCourses] = useState<ICourse[] | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    getTutors()
+      .then((resp) => {
+        setTutors(resp);
+        getCourses()
+          .then((resp) => {
+            setCourses(resp);
+          })
+          .catch(errorHandler);
+      })
+      .catch(errorHandler)
+      .finally(() => setLoading(false));
+  }, []);
+
+  const changeHandler = (name: string, value: any) => {
+    setSearchParams({ ...searchParams, [name]: value });
+  };
+
+  const onSubmit = () => {
+    setLoading(true);
+    getSchedule(searchParams)
+      .then((resp) => {
+        setSchedule(resp);
+      })
+      .catch(errorHandler)
+      .finally(() => setLoading(false));
+  };
+
+  const getTableData = () => {
+    const row: IRow[] = [];
+    if (!schedule) return row;
+    schedule.forEach((sIndex, i) => {
+      sIndex.coursesIds.forEach((s) => {
+        row.push({
+          id: i,
+          row: i + 1,
+          day: getFarsiDayOfWeek(sIndex.dayOfWeek),
+          courseTitle: getFarsiDayOfWeek(
+            courses?.find((c) => c.id === s)?.daysOfWeek || -1
+          ),
+        });
+      });
+    });
+    return row;
+  };
+
+  return (
+    <div className="flex flex-col justify-start items-start gap-3">
+      {loading ? <FullScreenLoading /> : <></>}
+      <div className="flex flex-row justify-start items-center gap-3 w-[600px]">
+        <StaticDropdown
+          name="tutorId"
+          value={searchParams.tutorId}
+          onChange={changeHandler}
+          options={
+            tutors
+              ? tutors.map((t) => ({
+                  id: t.id,
+                  name: t.firstName + " " + t.lastName,
+                }))
+              : []
+          }
+          placeholder="استاد"
+        />
+        <TextInput
+          label="شماره ترم"
+          onChange={changeHandler}
+          value={searchParams.termNum?.toString()}
+          name="termNum"
+        />
+        <StaticMultiSelectDropdown
+          name="daysOfWeek"
+          label="روز هفته"
+          onChange={changeHandler}
+          items={[
+            { id: 0, name: "شنبه" },
+            { id: 1, name: "یکشنبه" },
+            { id: 2, name: "دوشنبه" },
+            { id: 3, name: "سه شنبه" },
+            { id: 4, name: "چهارشتبه" },
+            { id: 5, name: "پنجشنبه" },
+          ]}
+          values={searchParams.preferedDays}
+          hideTagBox
+        />
+        <Button onClick={onSubmit} text="جستجو" type="primary" />
+      </div>
+      {schedule ? (
+        <CommonTableUI
+          reports={{
+            translatedHeaders: [
+              { headerName: "row", translateHeaderName: "ردیف" },
+              { headerName: "daysOfWeek", translateHeaderName: "روز" },
+              { headerName: "title", translateHeaderName: "عنوان" },
+              { headerName: "tutor", translateHeaderName: "نام استاد" },
+              { headerName: "time", translateHeaderName: "ساعت" },
+            ],
+            report: getTableData(),
+          }}
+        />
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
+
+export default Schedule;
