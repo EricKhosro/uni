@@ -6,9 +6,12 @@ import { CommonTableUI } from "Components/Table/CommonTableUI";
 import TextInput from "Components/TextInput/TextInput";
 import { ITableReport } from "Interfaces/Components-Interfaces/tableInterfaces";
 import { ICourse } from "Interfaces/DTO/course";
-import { ISchedule, IScheduleSearchParam } from "Interfaces/DTO/schedule";
+import {
+  IScheduleResponse,
+  IScheduleSearchParam,
+} from "Interfaces/DTO/schedule";
 import { ITutor } from "Interfaces/DTO/tutor";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getCourses } from "Requests/course";
 import { getSchedule } from "Requests/schedule";
 import { getTutors } from "Requests/tutor";
@@ -19,13 +22,14 @@ interface IRow extends ITableReport {
   row: number;
   day: string;
   courseTitle: string;
+  time: string;
 }
 
 const Schedule = () => {
   const [tutors, setTutors] = useState<ITutor[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useState({} as IScheduleSearchParam);
-  const [schedule, setSchedule] = useState<ISchedule[] | null>(null);
+  const [schedule, setSchedule] = useState<IScheduleResponse | null>(null);
   const [courses, setCourses] = useState<ICourse[] | null>(null);
 
   useEffect(() => {
@@ -59,16 +63,16 @@ const Schedule = () => {
 
   const getTableData = () => {
     const row: IRow[] = [];
-    if (!schedule) return row;
-    schedule.forEach((sIndex, i) => {
+    if (!schedule || !schedule.schedules) return row;
+    schedule.schedules.forEach((sIndex, i) => {
       sIndex.coursesIds.forEach((s) => {
+        const targetCourse = courses?.find((c) => c.id === s);
         row.push({
           id: i,
-          row: i + 1,
+          row: row.length + 1,
           day: getFarsiDayOfWeek(sIndex.dayOfWeek),
-          courseTitle: getFarsiDayOfWeek(
-            courses?.find((c) => c.id === s)?.daysOfWeek || -1
-          ),
+          courseTitle: targetCourse?.title || "-",
+          time: targetCourse?.time || "-",
         });
       });
     });
@@ -100,7 +104,7 @@ const Schedule = () => {
           name="termNum"
         />
         <StaticMultiSelectDropdown
-          name="daysOfWeek"
+          name="preferedDays"
           label="روز هفته"
           onChange={changeHandler}
           items={[
@@ -121,9 +125,8 @@ const Schedule = () => {
           reports={{
             translatedHeaders: [
               { headerName: "row", translateHeaderName: "ردیف" },
-              { headerName: "daysOfWeek", translateHeaderName: "روز" },
-              { headerName: "title", translateHeaderName: "عنوان" },
-              { headerName: "tutor", translateHeaderName: "نام استاد" },
+              { headerName: "day", translateHeaderName: "روز" },
+              { headerName: "courseTitle", translateHeaderName: "عنوان" },
               { headerName: "time", translateHeaderName: "ساعت" },
             ],
             report: getTableData(),

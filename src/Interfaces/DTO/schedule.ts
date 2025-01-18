@@ -9,3 +9,8 @@ export interface ISchedule {
   dayOfWeek: number;
   coursesIds: number[];
 }
+
+export interface IScheduleResponse {
+  schedules: ISchedule[];
+  tutorName: string;
+}

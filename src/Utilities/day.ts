@@ -3,15 +3,15 @@ export const getFarsiDayOfWeek = (dayIndex: number) => {
     case 0:
       return "شنبه";
     case 1:
-      return "یک شنبه";
+      return "یکشنبه";
     case 2:
-      return "دو شنبه";
+      return "دوشنبه";
     case 3:
       return "سه شنبه";
     case 4:
-      return "چهار شنبه";
+      return "چهارشنبه";
     case 5:
-      return "پنج شنبه";
+      return "پنجشنبه";
     case 6:
       return "جمعه";
 

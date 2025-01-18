@@ -36,9 +36,6 @@ export const CommonTableUI = <TRow extends ITableReport>({
     onAction?: () => void;
     PopupUI?: (props: ITablePopupProps<TRow>) => JSX.Element;
   }) => {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
-
     if (!headers || !headers.length) return;
 
     const clonedRow = JSON.parse(JSON.stringify(row));
@@ -82,54 +79,6 @@ export const CommonTableUI = <TRow extends ITableReport>({
           `}
       >
         {r}
-        {PopupUI && onAction ? (
-          <TableCell>
-            <div onClick={(e) => e.stopPropagation()}>
-              <ClickAwayListener
-                onClickAway={(e) => {
-                  e.stopPropagation();
-                  setIsPopupOpen(false);
-                }}
-              >
-                <>
-                  <div
-                    aria-describedby="simple-popover"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsPopupOpen(true);
-                      setAnchorEl(e.currentTarget);
-                    }}
-                  >
-                    <MoreVertIcon className="text-grayText w-6 h-6 cursor-pointer hover:bg-opacity-0.08 rounded-full transition-all duration-150" />
-                  </div>
-                  {isPopupOpen ? (
-                    <Popover
-                      id="simple-popover"
-                      open={isPopupOpen}
-                      anchorEl={anchorEl}
-                      onClose={() => {
-                        setIsPopupOpen(false);
-                      }}
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "left",
-                      }}
-                      dir="rtl"
-                    >
-                      <div className="w-32 flex flex-col justify-start items-center p-1">
-                        {<PopupUI row={row} onAction={onAction} />}
-                      </div>
-                    </Popover>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              </ClickAwayListener>
-            </div>
-          </TableCell>
-        ) : (
-          <></>
-        )}
       </TableRow>
     );
   };

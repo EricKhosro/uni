@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "./Footer";
 import TokenChecker from "../Components/TokenChecker";
 import Header from "./Header";
 import Navbar from "./Navbar/Navbar";
@@ -26,7 +25,6 @@ const MasterPage = ({ children }: IMasterPage) => {
             {children}
           </div>
         </div>
-        <Footer />
       </div>
     </TokenChecker>
   );

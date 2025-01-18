@@ -3,7 +3,7 @@ import { getRequest, postRequest } from "./requestTemplates";
 import { Packet } from "Interfaces/commonDTOs";
 
 export const getCourses = (): Promise<ICourse[]> =>
-  getRequest("/api/courses/getList");
+  getRequest("/course/get");
 
 export const addCourse = (dto: ICourse): Promise<Packet<boolean>> =>
-  postRequest("/api/courses/add", dto);
+  postRequest("/course/add", dto);

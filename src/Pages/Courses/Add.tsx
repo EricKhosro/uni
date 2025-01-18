@@ -1,35 +1,23 @@
 import Button from "Components/Button/Button";
-import CustomStaticDropdown from "Components/Dropdown/Custom/CustomStaticDropdown";
 import StaticDropdown from "Components/Dropdown/StaticDropdown";
-import { StaticMultiSelectDropdown } from "Components/Dropdown/StaticMultiSelectDropdown";
 import FullScreenLoading from "Components/Loading/FullScreenLoading";
 import TextInput from "Components/TextInput/TextInput";
 import { ICourse } from "Interfaces/DTO/course";
-import { ITutor } from "Interfaces/DTO/tutor";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { addCourse, getCourses } from "Requests/course";
-import { addTutor, getTutors } from "Requests/tutor";
+import { addCourse } from "Requests/course";
 import { errorHandler } from "Utilities/errorHandler";
 
 interface IProps {
   onAdd: () => void;
+  onClose: () => void;
 }
 
-const Add = ({ onAdd }: IProps) => {
-  const [formValues, setFormValues] = useState({} as ICourse);
+const Add = ({ onAdd, onClose }: IProps) => {
+  const [formValues, setFormValues] = useState({
+    tutor: "",
+  } as ICourse);
   const [loading, setLoading] = useState(false);
-  const [tutors, setTutors] = useState<ITutor[] | null>(null);
-
-  useEffect(() => {
-    setLoading(true);
-    getTutors()
-      .then((resp) => {
-        setTutors(resp);
-      })
-      .catch(errorHandler)
-      .finally(() => setLoading(false));
-  }, []);
 
   const changeHandler = (name: string, value: any) => {
     if (name === "tutor")
@@ -47,6 +35,7 @@ const Add = ({ onAdd }: IProps) => {
       .then((resp) => {
         if (resp.data) {
           onAdd();
+          onClose();
           toast.success(resp.msg);
         } else toast.error(resp.msg);
       })
@@ -55,7 +44,7 @@ const Add = ({ onAdd }: IProps) => {
   };
 
   return (
-    <div className="px-3 py-2 flex flex-col justify-start items-start gap-2 border border-gray2 rounded">
+    <div className="px-3 py-2 flex flex-col justify-start items-start gap-2 rounded">
       {loading ? <FullScreenLoading /> : <></>}
       <TextInput
         label="نام درس"
@@ -69,20 +58,7 @@ const Add = ({ onAdd }: IProps) => {
         value={formValues.termNum?.toString()}
         name="termNum"
       />
-      <CustomStaticDropdown
-        onChange={changeHandler}
-        value={formValues.tutor?.toString()}
-        name="tutor"
-        options={
-          tutors
-            ? tutors.map((t) => ({
-                id: t.id,
-                name: t.firstName + " " + t.lastName,
-              }))
-            : []
-        }
-        placeholder="استاد"
-      />
+
       <StaticDropdown
         name="daysOfWeek"
         placeholder="روز هفته"
@@ -95,6 +71,7 @@ const Add = ({ onAdd }: IProps) => {
           { id: 4, name: "چهارشتبه" },
           { id: 5, name: "پنجشنبه" },
         ]}
+        value={formValues.daysOfWeek}
       />
       <TextInput
         label="زمان"

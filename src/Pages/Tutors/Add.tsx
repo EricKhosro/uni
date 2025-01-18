@@ -12,9 +12,10 @@ import { errorHandler } from "Utilities/errorHandler";
 
 interface IProps {
   onAdd: () => void;
+  onClose: () => void;
 }
 
-const Add = ({ onAdd }: IProps) => {
+const Add = ({ onAdd, onClose }: IProps) => {
   const [formValues, setFormValues] = useState({} as ITutor);
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState<ICourse[] | null>(null);
@@ -39,6 +40,7 @@ const Add = ({ onAdd }: IProps) => {
       .then((resp) => {
         if (resp.data) {
           onAdd();
+          onClose();
           toast.success(resp.msg);
         } else toast.error(resp.msg);
       })
@@ -47,17 +49,19 @@ const Add = ({ onAdd }: IProps) => {
   };
 
   return (
-    <div className="px-3 py-2 flex flex-col justify-start items-start gap-2 border border-gray2 rounded">
+    <div className="px-3 py-2 flex flex-col justify-start items-start gap-5 w-[300px] rounded">
       {loading ? <FullScreenLoading /> : <></>}
       <TextInput
         label="نام"
         onChange={changeHandler}
         value={formValues.firstName}
+        name="firstName"
       />
       <TextInput
         label="نام خانوادگی"
         onChange={changeHandler}
-        value={formValues.firstName}
+        value={formValues.lastName}
+        name="lastName"
       />
       <StaticMultiSelectDropdown
         items={courses ? courses.map((c) => ({ id: c.id, name: c.title })) : []}

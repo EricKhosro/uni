@@ -14,7 +14,12 @@ const Courses = () => {
         <Modal
           isOpen
           onClose={() => setIsOpen(false)}
-          UI={<Add onAdd={() => setRefreshFlag(true)} />}
+          UI={
+            <Add
+              onClose={() => setIsOpen(false)}
+              onAdd={() => setRefreshFlag(true)}
+            />
+          }
         />
       ) : (
         <></>

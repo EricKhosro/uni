@@ -134,26 +134,6 @@ export const StaticMultiSelectDropdown: React.FC<Props> = ({
         ListboxProps={{ style: { fontSize: 12, maxHeight: "128px" } }}
         renderOption={(props, option, { selected, index }) => (
           <React.Fragment key={index}>
-            {index === 0 ? (
-              <li
-                onClick={selectAllHandler}
-                className={`!my-0 !py-0 body-medium !text-grayText ${
-                  values?.length === items.length ? "bg-red-04" : ""
-                }`}
-              >
-                <Checkbox
-                  icon={<UnCheckedCheckbox className="text-primary w-4 h-4" />}
-                  checkedIcon={
-                    <CheckedCheckbox className="text-primary w-4 h-4" />
-                  }
-                  style={{ marginRight: 8 }}
-                  checked={values?.length === items.length}
-                />
-                همه
-              </li>
-            ) : (
-              <></>
-            )}
             <li {...props} className="!my-0 !py-0 body-medium !text-grayText">
               <Checkbox
                 icon={<UnCheckedCheckbox className="text-primary w-4 h-4" />}
