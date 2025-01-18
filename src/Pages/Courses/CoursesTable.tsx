@@ -42,7 +42,6 @@ const CoursesTable = ({ ids, refreshFlag, onFetchComplete }: IProps) => {
             translatedHeaders: [
               { headerName: "row", translateHeaderName: "ردیف" },
               { headerName: "title", translateHeaderName: "عنوان" },
-              { headerName: "tutor", translateHeaderName: "نام استاد" },
               { headerName: "termNum", translateHeaderName: "شماره ترم" },
               { headerName: "daysOfWeek", translateHeaderName: "روز" },
               { headerName: "time", translateHeaderName: "ساعت" },
