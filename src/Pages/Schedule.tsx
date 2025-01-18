@@ -3,7 +3,6 @@ import StaticDropdown from "Components/Dropdown/StaticDropdown";
 import { StaticMultiSelectDropdown } from "Components/Dropdown/StaticMultiSelectDropdown";
 import FullScreenLoading from "Components/Loading/FullScreenLoading";
 import { CommonTableUI } from "Components/Table/CommonTableUI";
-import TextInput from "Components/TextInput/TextInput";
 import { ITableReport } from "Interfaces/Components-Interfaces/tableInterfaces";
 import { ICourse } from "Interfaces/DTO/course";
 import {
@@ -97,11 +96,24 @@ const Schedule = () => {
           }
           placeholder="استاد"
         />
-        <TextInput
+        <StaticMultiSelectDropdown
+          name="termNum"
           label="شماره ترم"
           onChange={changeHandler}
-          value={searchParams.termNum?.toString()}
-          name="termNum"
+          items={[
+            { id: 1, name: "ترم 1" },
+            { id: 2, name: "ترم 2" },
+            { id: 3, name: "ترم 3" },
+            { id: 4, name: "ترم 4" },
+            { id: 5, name: "ترم 5" },
+            { id: 6, name: "ترم 6" },
+            { id: 7, name: "ترم 7" },
+            { id: 8, name: "ترم 8" },
+            { id: 9, name: "ترم 9" },
+            { id: 10, name: "ترم 10" },
+          ]}
+          values={searchParams.termNum}
+          hideTagBox
         />
         <StaticMultiSelectDropdown
           name="preferedDays"

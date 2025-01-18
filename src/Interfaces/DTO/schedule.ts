@@ -1,6 +1,6 @@
 export interface IScheduleSearchParam {
   tutorId: number;
-  termNum: number;
+  termNum: number[];
   preferedDays: number[];
 }
 
